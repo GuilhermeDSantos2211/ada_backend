@@ -1,20 +1,19 @@
 package com.ada.web2.web1339.service;
 
-import com.ada.web2.web1339.dto.ProdutoDto;
 import com.ada.web2.web1339.dto.ProdutoResponsePaginationDto;
 import com.ada.web2.web1339.mapper.ProdutoMapper;
 import com.ada.web2.web1339.model.Produto;
 import com.ada.web2.web1339.model.ProdutoEntity;
 import com.ada.web2.web1339.repository.ProdutoRepository;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 //@RequiredArgsConstructor
@@ -40,9 +39,9 @@ public class ProdutoService {
         produtos.add(new ProdutoEntity(null, "Arroz", 1.9));
         produtos.add(new ProdutoEntity(null, "Feijão", 2.3));
         produtos.add(new ProdutoEntity(null, "Açúcar", 1.7));
-        produtos.add(new ProdutoEntity(null, "Sal", 0.9));
         produtos.add(new ProdutoEntity(null, "Café", 4.5));
         produtos.add(new ProdutoEntity(null, "Chocolate", 3.8));
+        produtos.add(new ProdutoEntity(null, "Pão 2", 3.8));
 
         produtoRepository.saveAll(produtos);
     }
@@ -58,10 +57,10 @@ public class ProdutoService {
         var produtosDto = produtoMapper.mapProdutoDtoList(paginaProdutos.getContent());
 
         return new ProdutoResponsePaginationDto(paginaProdutos.getTotalPages(),
-                                                paginaProdutos.getTotalElements(),
-                                                paginaProdutos.getSize(),
-                                                paginaProdutos.getNumber(),
-                                                produtosDto);
+                paginaProdutos.getTotalElements(),
+                paginaProdutos.getSize(),
+                paginaProdutos.getNumber(),
+                produtosDto);
     }
 
     public Produto addProduto(String nome, double preco) {
